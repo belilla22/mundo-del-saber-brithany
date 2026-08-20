@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Brithany · Mi Mundo de Emociones</title>
+<style>
+:root{--pink:#ff4f7b;--purple:#7657e8;--bg:#fff8fb;--text:#29243a;--muted:#766f82;--card:#fff;--green:#45b879}
+*{box-sizing:border-box} body{margin:0;background:linear-gradient(160deg,#fff7fb,#f3f0ff);font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--text)}
+.app{max-width:480px;min-height:100vh;margin:auto;background:var(--bg);box-shadow:0 0 30px #0001;position:relative;overflow:hidden}
+header{padding:22px 20px 12px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:900;font-size:20px}.logo span{color:var(--pink)}
+.parent{border:0;background:#fff;border-radius:20px;padding:9px 13px;font-weight:700;color:var(--purple);box-shadow:0 4px 14px #0000000d}
+.screen{padding:12px 20px 100px}.hero{background:linear-gradient(135deg,#ff7194,#8b6df0);color:#fff;border-radius:28px;padding:24px;box-shadow:0 12px 25px #7657e833}
+.hero h1{margin:0 0 6px;font-size:30px}.hero p{margin:0;opacity:.95}
+.card{background:#fff;border-radius:24px;padding:18px;margin-top:18px;box-shadow:0 6px 20px #0000000b}
+.card h2{margin:0 0 14px;font-size:20px}
+.emotions{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.emotion{border:0;border-radius:22px;background:#faf9ff;padding:16px 10px;font-size:17px;font-weight:800;color:var(--text);box-shadow:inset 0 0 0 2px #eee;cursor:pointer}
+.face{display:block;font-size:42px;margin-bottom:6px}
+.progress{height:10px;background:#eee;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;width:35%;background:linear-gradient(90deg,var(--pink),var(--purple));border-radius:99px}
+.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);max-width:480px;width:100%;padding:14px 20px;background:#fff;box-shadow:0 -5px 18px #0000000d;display:flex;gap:10px}
+.bottom button{flex:1;border:0;border-radius:18px;padding:14px;font-weight:900;background:#f2efff;color:var(--purple)}
+.primary{background:var(--pink)!important;color:#fff!important}
+.modal{position:fixed;inset:0;background:#0007;display:none;align-items:flex-end;justify-content:center;z-index:5}.modal.show{display:flex}
+.sheet{background:#fff;width:min(480px,100%);border-radius:30px 30px 0 0;padding:24px;max-height:85vh;overflow:auto}
+.close{float:right;border:0;background:#f1eef7;border-radius:50%;width:36px;height:36px;font-size:20px}
+.big{font-size:60px;text-align:center}.choice{width:100%;border:0;background:#f8f6ff;padding:16px;border-radius:18px;margin:7px 0;text-align:left;font-weight:800;font-size:16px}
+.result{text-align:center}.stars{font-size:30px;letter-spacing:4px}
+textarea{width:100%;min-height:100px;border:2px solid #eee;border-radius:18px;padding:14px;font:inherit;resize:none}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="logo">🌈 <span>Brithany</span></div><button class="parent" onclick="openParents()">👨‍👩‍👧 Padres</button></header>
+
+<main class="screen">
+<section class="hero">
+  <h1>¡Hola, Brithany! 💗</h1>
+  <p>Vamos a descubrir cómo se siente tu corazón hoy.</p>
+</section>
+
+<section class="card">
+  <h2>¿Cómo te sientes?</h2>
+  <div class="emotions">
+    <button class="emotion" onclick="choose('😊','Feliz','green')"><span class="face">😊</span>Feliz</button>
+    <button class="emotion" onclick="choose('😢','Triste','blue')"><span class="face">😢</span>Triste</button>
+    <button class="emotion" onclick="choose('😡','Enfadada','red')"><span class="face">😡</span>Enfadada</button>
+    <button class="emotion" onclick="choose('😨','Asustada','purple')"><span class="face">😨</span>Asustada</button>
+    <button class="emotion" onclick="choose('😟','Preocupada','yellow')"><span class="face">😟</span>Preocupada</button>
+    <button class="emotion" onclick="choose('😌','Tranquila','teal')"><span class="face">😌</span>Tranquila</button>
+  </div>
+</section>
+
+<section class="card">
+  <h2>⭐ Tu aventura</h2>
+  <p style="color:var(--muted)">Hoy llevas 3 estrellas por escuchar tus emociones.</p>
+  <div class="progress"><i></i></div>
+</section>
+
+<section class="card">
+  <h2>💡 Tu frase de hoy</h2>
+  <p style="font-size:18px;font-weight:750">“Todas mis emociones están bien. Puedo aprender a manejarlas.”</p>
+</section>
+</main>
+
+<div class="bottom">
+<button onclick="breath()">🫧 Respirar</button>
+<button class="primary" onclick="choose('❤️','Necesito ayuda','heart')">❤️ Necesito ayuda</button>
+</div>
+
+<div id="modal" class="modal"><div class="sheet" id="sheet"></div></div>
+</div>
+
+<script>
+let selected={};
+function choose(face,name){
+ selected={face,name};
+ document.getElementById('modal').classList.add('show');
+ document.getElementById('sheet').innerHTML=`
+ <button class="close" onclick="closeModal()">×</button>
+ <div class="big">${face}</div>
+ <h2 style="text-align:center">Te escucho, Brithany 💗</h2>
+ <p style="text-align:center;color:#766f82">Has elegido: <b>${name}</b></p>
+ <p style="font-weight:800">¿Qué pasó?</p>
+ <button class="choice" onclick="nextStep('🧸','Quiero contarlo con dibujos')">🧸 Quiero contarlo con dibujos</button>
+ <button class="choice" onclick="nextStep('💬','Quiero contarlo con palabras')">💬 Quiero contarlo con palabras</button>
+ <button class="choice" onclick="nextStep('🤗','Solo quiero un abrazo')">🤗 Solo quiero un abrazo</button>`;
+}
+function nextStep(icon,title){
+ document.getElementById('sheet').innerHTML=`
+ <button class="close" onclick="closeModal()">×</button>
+ <div class="big">${icon}</div>
+ <h2>${title}</h2>
+ <p>Cuéntame un poquito. No hay respuestas malas.</p>
+ <textarea placeholder="Puedes escribir aquí lo que pasó…"></textarea>
+ <button class="choice" style="background:#ff4f7b;color:white;text-align:center" onclick="tool()">Continuar →</button>`;
+}
+function tool(){
+ const tools = selected.name==='Enfadada' ? ['🔥 Apagar el volcán','🫧 Respirar despacio','🤝 Pedir ayuda'] :
+ selected.name==='Asustada' ? ['🛡️ Crear mi escudo','🫧 Respirar despacio','🤗 Buscar un abrazo'] :
+ ['🫧 Respirar despacio','💬 Decir lo que necesito','🤗 Pedir un abrazo'];
+ document.getElementById('sheet').innerHTML=`
+ <button class="close" onclick="closeModal()">×</button>
+ <h2>🌟 Vamos a ayudarte</h2>
+ <p>Elige una herramienta para sentirte un poquito mejor.</p>
+ ${tools.map(x=>`<button class="choice" onclick="done('${x}')">${x}</button>`).join('')}`;
+}
+function done(x){
+ document.getElementById('sheet').innerHTML=`<div class="result"><div class="big">🌈</div><h2>¡Muy bien, Brithany!</h2><p>Has escuchado tu emoción y has elegido una herramienta.</p><div class="stars">⭐ ⭐ ⭐</div><button class="choice" style="text-align:center;background:#45b879;color:white" onclick="closeModal()">¡Hecho!</button></div>`;
+}
+function breath(){
+ document.getElementById('modal').classList.add('show');
+ document.getElementById('sheet').innerHTML=`<button class="close" onclick="closeModal()">×</button><div class="big" id="bubble">🫧</div><h2 style="text-align:center">Respiramos juntas</h2><p style="text-align:center">Inspira lentamente… y suelta el aire.</p><button class="choice" style="text-align:center;background:#7657e8;color:white" onclick="closeModal()">Ya me siento mejor 💗</button>`;
+}
+function openParents(){
+ document.getElementById('modal').classList.add('show');
+ document.getElementById('sheet').innerHTML=`<button class="close" onclick="closeModal()">×</button><h2>👨‍👩‍👧 Zona de padres</h2><p style="color:#766f82">Resumen de hoy para acompañar a Brithany sin juzgar sus emociones.</p><div class="card" style="margin-top:12px"><b>😊 Emociones registradas</b><p>Feliz · Enfadada · Tranquila</p></div><div class="card"><b>💡 Idea para hoy</b><p>Cuando aparezca un enfado, valida primero la emoción y después buscad juntas una solución.</p></div><div class="card"><b>🗣️ Frase útil</b><p>“Veo que estás muy enfadada. Estoy aquí contigo. Primero nos calmamos y después lo hablamos.”</p></div>`;
+}
+function closeModal(){document.getElementById('modal').classList.remove('show')}
+</script>
+</body>
+</html>
