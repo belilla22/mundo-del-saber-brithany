@@ -2,122 +2,1013 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Brithany · Mi Mundo de Emociones</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0754a8">
+
+<title>El Mundo del Saber de Brithany</title>
+
 <style>
-:root{--pink:#ff4f7b;--purple:#7657e8;--bg:#fff8fb;--text:#29243a;--muted:#766f82;--card:#fff;--green:#45b879}
-*{box-sizing:border-box} body{margin:0;background:linear-gradient(160deg,#fff7fb,#f3f0ff);font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--text)}
-.app{max-width:480px;min-height:100vh;margin:auto;background:var(--bg);box-shadow:0 0 30px #0001;position:relative;overflow:hidden}
-header{padding:22px 20px 12px;display:flex;justify-content:space-between;align-items:center}
-.logo{font-weight:900;font-size:20px}.logo span{color:var(--pink)}
-.parent{border:0;background:#fff;border-radius:20px;padding:9px 13px;font-weight:700;color:var(--purple);box-shadow:0 4px 14px #0000000d}
-.screen{padding:12px 20px 100px}.hero{background:linear-gradient(135deg,#ff7194,#8b6df0);color:#fff;border-radius:28px;padding:24px;box-shadow:0 12px 25px #7657e833}
-.hero h1{margin:0 0 6px;font-size:30px}.hero p{margin:0;opacity:.95}
-.card{background:#fff;border-radius:24px;padding:18px;margin-top:18px;box-shadow:0 6px 20px #0000000b}
-.card h2{margin:0 0 14px;font-size:20px}
-.emotions{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.emotion{border:0;border-radius:22px;background:#faf9ff;padding:16px 10px;font-size:17px;font-weight:800;color:var(--text);box-shadow:inset 0 0 0 2px #eee;cursor:pointer}
-.face{display:block;font-size:42px;margin-bottom:6px}
-.progress{height:10px;background:#eee;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;width:35%;background:linear-gradient(90deg,var(--pink),var(--purple));border-radius:99px}
-.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);max-width:480px;width:100%;padding:14px 20px;background:#fff;box-shadow:0 -5px 18px #0000000d;display:flex;gap:10px}
-.bottom button{flex:1;border:0;border-radius:18px;padding:14px;font-weight:900;background:#f2efff;color:var(--purple)}
-.primary{background:var(--pink)!important;color:#fff!important}
-.modal{position:fixed;inset:0;background:#0007;display:none;align-items:flex-end;justify-content:center;z-index:5}.modal.show{display:flex}
-.sheet{background:#fff;width:min(480px,100%);border-radius:30px 30px 0 0;padding:24px;max-height:85vh;overflow:auto}
-.close{float:right;border:0;background:#f1eef7;border-radius:50%;width:36px;height:36px;font-size:20px}
-.big{font-size:60px;text-align:center}.choice{width:100%;border:0;background:#f8f6ff;padding:16px;border-radius:18px;margin:7px 0;text-align:left;font-weight:800;font-size:16px}
-.result{text-align:center}.stars{font-size:30px;letter-spacing:4px}
-textarea{width:100%;min-height:100px;border:2px solid #eee;border-radius:18px;padding:14px;font:inherit;resize:none}
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  min-height:100%;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:linear-gradient(135deg,#0754a8,#1976d2,#51b94b);
+  color:#17324d;
+  overflow-x:hidden;
+}
+
+button{
+  font:inherit;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.wrap{
+  width:min(94%,900px);
+  margin:auto;
+  padding:20px 0 40px;
+}
+
+.card{
+  background:white;
+  border:5px solid #ffd928;
+  border-radius:28px;
+  padding:clamp(16px,4vw,30px);
+  margin:15px 0;
+  box-shadow:0 8px 0 #164d83;
+}
+
+.logo{
+  background:#0754a8;
+  color:#ffd928;
+  border:4px solid #ffd928;
+  border-radius:22px;
+  padding:18px 10px;
+  text-align:center;
+  font-size:clamp(32px,8vw,60px);
+  font-weight:900;
+  line-height:1.1;
+  text-shadow:3px 3px #123c69;
+}
+
+.big{
+  text-align:center;
+  font-size:clamp(48px,14vw,80px);
+  margin:18px 0;
+}
+
+h2{
+  text-align:center;
+  color:#0754a8;
+  font-size:clamp(25px,6vw,38px);
+}
+
+.subtitle{
+  text-align:center;
+  color:#0754a8;
+  font-size:clamp(18px,4vw,24px);
+  font-weight:900;
+  line-height:1.4;
+}
+
+.btn{
+  display:block;
+  width:min(100%,600px);
+  margin:12px auto;
+  padding:16px 20px;
+  border:0;
+  border-radius:18px;
+  font-size:clamp(18px,4vw,23px);
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 6px rgba(0,0,0,.2);
+  touch-action:manipulation;
+}
+
+.btn:active,
+.world:active,
+.answer:active{
+  transform:translateY(3px);
+}
+
+.yellow{
+  background:#ffd928;
+  color:#17324d;
+}
+
+.blue{
+  background:#0754a8;
+  color:white;
+}
+
+.green{
+  background:#51b94b;
+  color:white;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.world{
+  background:#f7fbff;
+  border:4px solid #2c83d5;
+  border-radius:20px;
+  padding:16px 8px;
+  min-height:145px;
+  cursor:pointer;
+  text-align:center;
+  font-size:clamp(17px,4vw,21px);
+  font-weight:900;
+  color:#0754a8;
+  box-shadow:0 5px #a9ccec;
+  touch-action:manipulation;
+}
+
+.world span{
+  display:block;
+  font-size:clamp(42px,10vw,58px);
+  margin-bottom:7px;
+}
+
+.question{
+  background:white;
+  border:3px solid #2c83d5;
+  border-radius:18px;
+  padding:16px;
+  margin:15px 0;
+}
+
+.question p{
+  font-size:clamp(18px,4vw,22px);
+  font-weight:900;
+  text-align:center;
+}
+
+.answer{
+  display:block;
+  width:100%;
+  padding:15px;
+  margin:9px 0;
+  border:3px solid #2c83d5;
+  border-radius:15px;
+  background:#f7fbff;
+  font-size:18px;
+  font-weight:800;
+  cursor:pointer;
+  touch-action:manipulation;
+}
+
+.correct{
+  background:#baf0b4 !important;
+  border-color:#38a832 !important;
+}
+
+.wrong{
+  background:#ffd0d8 !important;
+  border-color:#e65b70 !important;
+}
+
+.feedback{
+  text-align:center;
+  font-size:21px;
+  font-weight:900;
+  min-height:32px;
+  margin-top:8px;
+}
+
+.story{
+  background:#f5fbff;
+  border-left:7px solid #ffd928;
+  border-radius:12px;
+  padding:18px;
+  font-size:18px;
+  line-height:1.65;
+}
+
+.titlebar{
+  background:#0754a8;
+  color:white;
+  border:4px solid #ffd928;
+  border-radius:18px;
+  padding:14px;
+  text-align:center;
+  font-size:clamp(22px,5vw,32px);
+  font-weight:900;
+}
+
+.score{
+  position:sticky;
+  top:5px;
+  z-index:5;
+  background:white;
+  border:3px solid #ffd928;
+  border-radius:14px;
+  padding:9px;
+  text-align:center;
+  font-weight:900;
+  color:#0754a8;
+  margin:12px 0;
+}
+
+.hide{
+  display:none !important;
+}
+
+.small{
+  text-align:center;
+  font-size:14px;
+  opacity:.8;
+}
+
+@media(min-width:700px){
+  .grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
+@media(max-width:480px){
+  .wrap{
+    width:96%;
+  }
+
+  .card{
+    border-width:4px;
+    border-radius:23px;
+  }
+
+  .grid{
+    gap:10px;
+  }
+}
 </style>
 </head>
+
 <body>
-<div class="app">
-<header><div class="logo">🌈 <span>Brithany</span></div><button class="parent" onclick="openParents()">👨‍👩‍👧 Padres</button></header>
 
-<main class="screen">
-<section class="hero">
-  <h1>¡Hola, Brithany! 💗</h1>
-  <p>Vamos a descubrir cómo se siente tu corazón hoy.</p>
-</section>
+<div class="wrap">
 
-<section class="card">
-  <h2>¿Cómo te sientes?</h2>
-  <div class="emotions">
-    <button class="emotion" onclick="choose('😊','Feliz','green')"><span class="face">😊</span>Feliz</button>
-    <button class="emotion" onclick="choose('😢','Triste','blue')"><span class="face">😢</span>Triste</button>
-    <button class="emotion" onclick="choose('😡','Enfadada','red')"><span class="face">😡</span>Enfadada</button>
-    <button class="emotion" onclick="choose('😨','Asustada','purple')"><span class="face">😨</span>Asustada</button>
-    <button class="emotion" onclick="choose('😟','Preocupada','yellow')"><span class="face">😟</span>Preocupada</button>
-    <button class="emotion" onclick="choose('😌','Tranquila','teal')"><span class="face">😌</span>Tranquila</button>
-  </div>
-</section>
+<!-- PORTADA -->
+<section id="inicio">
 
-<section class="card">
-  <h2>⭐ Tu aventura</h2>
-  <p style="color:var(--muted)">Hoy llevas 3 estrellas por escuchar tus emociones.</p>
-  <div class="progress"><i></i></div>
-</section>
+<div class="card">
 
-<section class="card">
-  <h2>💡 Tu frase de hoy</h2>
-  <p style="font-size:18px;font-weight:750">“Todas mis emociones están bien. Puedo aprender a manejarlas.”</p>
-</section>
-</main>
-
-<div class="bottom">
-<button onclick="breath()">🫧 Respirar</button>
-<button class="primary" onclick="choose('❤️','Necesito ayuda','heart')">❤️ Necesito ayuda</button>
+<div class="logo">
+✨ EL MUNDO<br>
+DEL SABER ✨
 </div>
 
-<div id="modal" class="modal"><div class="sheet" id="sheet"></div></div>
+<div class="big">
+📚 👧 ⭐ 🌎
 </div>
+
+<h2>de Brithany</h2>
+
+<p class="subtitle">
+¡Bienvenida a una aventura llena de aprendizaje!
+</p>
+
+<button class="btn yellow" onclick="sonidoClick();mostrar('mundos')">
+⭐ COMENZAR AVENTURA ⭐
+</button>
+
+<p class="small">
+Puedes entrar directamente a cualquier asignatura.
+</p>
+
+</div>
+</section>
+
+
+<!-- ASIGNATURAS -->
+<section id="mundos" class="hide">
+
+<div class="card">
+
+<div class="logo" style="font-size:35px">
+🌟 EL MUNDO DEL SABER 🌟
+</div>
+
+<p class="subtitle">
+Elige la asignatura que quieras.
+</p>
+
+<div class="grid">
+
+<button class="world" onclick="abrirMateria('matematicas')">
+<span>➕➖</span>
+Matemáticas
+</button>
+
+<button class="world" onclick="abrirMateria('lectura')">
+<span>📖</span>
+Lectura
+</button>
+
+<button class="world" onclick="abrirMateria('ingles')">
+<span>🇬🇧</span>
+Inglés
+</button>
+
+<button class="world" onclick="abrirMateria('cultura')">
+<span>🌎</span>
+Cultura general
+</button>
+
+<button class="world" onclick="abrirMateria('ciencia')">
+<span>🔬</span>
+Ciencia
+</button>
+
+<button class="world" onclick="abrirMateria('palabras')">
+<span>🔤</span>
+Palabras
+</button>
+
+</div>
+
+<button class="btn blue" onclick="sonidoClick();mostrar('inicio')">
+🏠 VOLVER A INICIO
+</button>
+
+</div>
+</section>
+
+
+<!-- ACTIVIDAD -->
+<section id="actividad" class="hide">
+
+<div class="card">
+
+<div id="titulo" class="titlebar"></div>
+
+<div id="puntuacion" class="score"></div>
+
+<div id="contenido"></div>
+
+<button class="btn blue" onclick="sonidoClick();mostrar('mundos')">
+📚 ELEGIR OTRA ASIGNATURA
+</button>
+
+</div>
+</section>
+
+</div>
+
 
 <script>
-let selected={};
-function choose(face,name){
- selected={face,name};
- document.getElementById('modal').classList.add('show');
- document.getElementById('sheet').innerHTML=`
- <button class="close" onclick="closeModal()">×</button>
- <div class="big">${face}</div>
- <h2 style="text-align:center">Te escucho, Brithany 💗</h2>
- <p style="text-align:center;color:#766f82">Has elegido: <b>${name}</b></p>
- <p style="font-weight:800">¿Qué pasó?</p>
- <button class="choice" onclick="nextStep('🧸','Quiero contarlo con dibujos')">🧸 Quiero contarlo con dibujos</button>
- <button class="choice" onclick="nextStep('💬','Quiero contarlo con palabras')">💬 Quiero contarlo con palabras</button>
- <button class="choice" onclick="nextStep('🤗','Solo quiero un abrazo')">🤗 Solo quiero un abrazo</button>`;
+
+/* =========================
+   SONIDOS
+========================= */
+
+let audioContext=null;
+
+function obtenerAudio(){
+
+  if(!audioContext){
+
+    audioContext=
+      new(window.AudioContext ||
+      window.webkitAudioContext)();
+
+  }
+
+  if(audioContext.state==="suspended"){
+    audioContext.resume();
+  }
+
+  return audioContext;
 }
-function nextStep(icon,title){
- document.getElementById('sheet').innerHTML=`
- <button class="close" onclick="closeModal()">×</button>
- <div class="big">${icon}</div>
- <h2>${title}</h2>
- <p>Cuéntame un poquito. No hay respuestas malas.</p>
- <textarea placeholder="Puedes escribir aquí lo que pasó…"></textarea>
- <button class="choice" style="background:#ff4f7b;color:white;text-align:center" onclick="tool()">Continuar →</button>`;
+
+
+function tono(frecuencia,duracion,tipo="sine"){
+
+  try{
+
+    const audio=obtenerAudio();
+
+    const oscilador=
+      audio.createOscillator();
+
+    const ganancia=
+      audio.createGain();
+
+    oscilador.type=tipo;
+    oscilador.frequency.value=frecuencia;
+
+    ganancia.gain.setValueAtTime(
+      0.0001,
+      audio.currentTime
+    );
+
+    ganancia.gain.exponentialRampToValueAtTime(
+      0.06,
+      audio.currentTime+0.01
+    );
+
+    ganancia.gain.exponentialRampToValueAtTime(
+      0.0001,
+      audio.currentTime+duracion
+    );
+
+    oscilador.connect(ganancia);
+    ganancia.connect(audio.destination);
+
+    oscilador.start();
+    oscilador.stop(
+      audio.currentTime+duracion+0.02
+    );
+
+  }catch(e){}
 }
-function tool(){
- const tools = selected.name==='Enfadada' ? ['🔥 Apagar el volcán','🫧 Respirar despacio','🤝 Pedir ayuda'] :
- selected.name==='Asustada' ? ['🛡️ Crear mi escudo','🫧 Respirar despacio','🤗 Buscar un abrazo'] :
- ['🫧 Respirar despacio','💬 Decir lo que necesito','🤗 Pedir un abrazo'];
- document.getElementById('sheet').innerHTML=`
- <button class="close" onclick="closeModal()">×</button>
- <h2>🌟 Vamos a ayudarte</h2>
- <p>Elige una herramienta para sentirte un poquito mejor.</p>
- ${tools.map(x=>`<button class="choice" onclick="done('${x}')">${x}</button>`).join('')}`;
+
+
+/* CLIC */
+
+function sonidoClick(){
+
+  tono(520,.06,"square");
+
 }
-function done(x){
- document.getElementById('sheet').innerHTML=`<div class="result"><div class="big">🌈</div><h2>¡Muy bien, Brithany!</h2><p>Has escuchado tu emoción y has elegido una herramienta.</p><div class="stars">⭐ ⭐ ⭐</div><button class="choice" style="text-align:center;background:#45b879;color:white" onclick="closeModal()">¡Hecho!</button></div>`;
+
+
+/* CORRECTA */
+
+function sonidoCorrecta(){
+
+  tono(660,.09);
+  setTimeout(()=>tono(880,.13),90);
+
 }
-function breath(){
- document.getElementById('modal').classList.add('show');
- document.getElementById('sheet').innerHTML=`<button class="close" onclick="closeModal()">×</button><div class="big" id="bubble">🫧</div><h2 style="text-align:center">Respiramos juntas</h2><p style="text-align:center">Inspira lentamente… y suelta el aire.</p><button class="choice" style="text-align:center;background:#7657e8;color:white" onclick="closeModal()">Ya me siento mejor 💗</button>`;
+
+
+/* INCORRECTA */
+
+function sonidoIncorrecta(){
+
+  tono(180,.12,"sawtooth");
+  setTimeout(()=>tono(120,.16,"sawtooth"),100);
+
 }
-function openParents(){
- document.getElementById('modal').classList.add('show');
- document.getElementById('sheet').innerHTML=`<button class="close" onclick="closeModal()">×</button><h2>👨‍👩‍👧 Zona de padres</h2><p style="color:#766f82">Resumen de hoy para acompañar a Brithany sin juzgar sus emociones.</p><div class="card" style="margin-top:12px"><b>😊 Emociones registradas</b><p>Feliz · Enfadada · Tranquila</p></div><div class="card"><b>💡 Idea para hoy</b><p>Cuando aparezca un enfado, valida primero la emoción y después buscad juntas una solución.</p></div><div class="card"><b>🗣️ Frase útil</b><p>“Veo que estás muy enfadada. Estoy aquí contigo. Primero nos calmamos y después lo hablamos.”</p></div>`;
+
+
+/* FINAL */
+
+function sonidoFinal(){
+
+  tono(523,.08);
+  setTimeout(()=>tono(659,.08),80);
+  setTimeout(()=>tono(784,.16),160);
+
 }
-function closeModal(){document.getElementById('modal').classList.remove('show')}
+
+
+/* =========================
+   NAVEGACIÓN
+========================= */
+
+function mostrar(id){
+
+  document
+    .querySelectorAll("section")
+    .forEach(s=>s.classList.add("hide"));
+
+  document
+    .getElementById(id)
+    .classList.remove("hide");
+
+  window.scrollTo(0,0);
+
+}
+
+
+/* =========================
+   DATOS
+========================= */
+
+const materias={
+
+matematicas:{
+nombre:"MATEMÁTICAS",
+icono:"➕➖",
+
+preguntas:[
+
+["2 + 3 = ?",["5","6","4"],0],
+
+["7 - 2 = ?",["6","4","5"],2],
+
+["4 + 5 = ?",["8","9","7"],1],
+
+["10 - 3 = ?",["6","8","7"],2],
+
+["6 + 6 = ?",["11","12","13"],1],
+
+["9 - 5 = ?",["3","5","4"],2],
+
+["3 + 7 = ?",["9","10","11"],1],
+
+["8 - 4 = ?",["4","3","5"],0],
+
+["5 + 6 = ?",["10","12","11"],2],
+
+["12 - 7 = ?",["4","6","5"],2]
+
+]
+
+},
+
+
+ingles:{
+nombre:"INGLÉS",
+icono:"🇬🇧",
+
+preguntas:[
+
+["¿Cómo se dice «Hola»?",
+["Hello","Goodbye","Please"],0],
+
+["¿Cómo se dice «Gracias»?",
+["Sorry","Thank you","Hello"],1],
+
+["¿Cómo se dice «azul»?",
+["Blue","Green","Yellow"],0],
+
+["¿Cómo se dice «perro»?",
+["Cat","Dog","Bird"],1],
+
+["¿Cómo se dice «rojo»?",
+["Green","Blue","Red"],2],
+
+["¿Cómo se dice «cinco»?",
+["Three","Five","Eight"],1],
+
+["¿Cómo se dice «mamá»?",
+["Mother","Father","Sister"],0],
+
+["¿Cómo se dice «adiós»?",
+["Please","Goodbye","Hello"],1]
+
+]
+
+},
+
+
+cultura:{
+nombre:"CULTURA GENERAL",
+icono:"🌎",
+
+preguntas:[
+
+["¿En qué planeta vivimos?",
+["Marte","Tierra","Júpiter"],1],
+
+["¿Cuántos días tiene una semana?",
+["5","7","10"],1],
+
+["¿Cuál es un animal?",
+["Mesa","Perro","Lápiz"],1],
+
+["¿Qué vemos por la noche?",
+["La Luna","El desayuno","Un zapato"],0],
+
+["¿Qué usamos para escribir?",
+["Vaso","Lápiz","Zapato"],1],
+
+["¿Cuál es un continente?",
+["Europa","Lunes","Verde"],0],
+
+["¿Qué animal dice «miau»?",
+["Perro","Caballo","Gato"],2],
+
+["¿Qué estación suele ser fría?",
+["Invierno","Verano","Primavera"],0]
+
+]
+
+},
+
+
+ciencia:{
+nombre:"CIENCIA",
+icono:"🔬",
+
+preguntas:[
+
+["¿Qué necesitan las plantas para crecer?",
+["Agua y luz","Chocolate","Juguetes"],0],
+
+["¿Qué respiramos?",
+["Arena","Oxígeno","Papel"],1],
+
+["¿Qué astro nos da luz durante el día?",
+["La Luna","El Sol","Marte"],1],
+
+["¿Qué animal pone huevos?",
+["Gallina","Perro","Gato"],0],
+
+["¿En qué estado está el hielo?",
+["Líquido","Sólido","Gas"],1],
+
+["¿Qué parte de la planta absorbe agua?",
+["Raíz","Flor","Fruto"],0],
+
+["¿Qué órgano bombea la sangre?",
+["Pulmón","Corazón","Ojo"],1],
+
+["¿Qué usamos para oler?",
+["Orejas","Nariz","Manos"],1]
+
+]
+
+},
+
+
+palabras:{
+nombre:"PALABRAS",
+icono:"🔤",
+
+preguntas:[
+
+["¿Cuál empieza con A?",
+["Árbol","Casa","Gato"],0],
+
+["¿Cuál empieza con M?",
+["Perro","Manzana","Sol"],1],
+
+["¿Cuál rima con «casa»?",
+["Taza","Perro","Luna"],0],
+
+["¿Cuál es un color?",
+["Mesa","Azul","Zapato"],1],
+
+["¿Cuál es una fruta?",
+["Manzana","Silla","Lápiz"],0],
+
+["¿Cuál es un animal?",
+["Libro","Gato","Puerta"],1],
+
+["¿Cuál es lo contrario de grande?",
+["Alto","Pequeño","Largo"],1],
+
+["¿Cuál es un verbo?",
+["Correr","Azul","Casa"],0]
+
+]
+
+}
+
+};
+
+
+/* =========================
+   ABRIR MATERIA
+========================= */
+
+function abrirMateria(materia){
+
+  sonidoClick();
+
+  if(materia==="lectura"){
+
+    abrirLectura();
+
+    return;
+
+  }
+
+  const datos=materias[materia];
+
+  document.getElementById("titulo").textContent=
+    datos.icono+" "+datos.nombre;
+
+  document.getElementById("puntuacion").textContent=
+    "Puntuación: 0 / "+datos.preguntas.length;
+
+  const contenido=
+    document.getElementById("contenido");
+
+  contenido.innerHTML="";
+
+  datos.preguntas.forEach((pregunta,indice)=>{
+
+    const caja=
+      document.createElement("div");
+
+    caja.className="question";
+
+    caja.dataset.respondida="no";
+
+    let html=
+      "<p>"+(indice+1)+". "+
+      pregunta[0]+"</p>";
+
+    pregunta[1].forEach((respuesta,posicion)=>{
+
+      html+=
+      `<button class="answer"
+      onclick="responder(
+      this,
+      ${posicion===pregunta[2]},
+      ${indice},
+      ${datos.preguntas.length}
+      )">
+      ${respuesta}
+      </button>`;
+
+    });
+
+    html+=
+      '<div class="feedback"></div>';
+
+    caja.innerHTML=html;
+
+    contenido.appendChild(caja);
+
+  });
+
+  document.getElementById("actividad").dataset.puntos="0";
+
+  mostrar("actividad");
+
+}
+
+
+/* =========================
+   RESPUESTAS
+========================= */
+
+function responder(
+  boton,
+  correcta,
+  indice,
+  total
+){
+
+  const caja=boton.parentElement;
+
+  if(caja.dataset.respondida==="si"){
+    return;
+  }
+
+  caja.dataset.respondida="si";
+
+  const botones=
+    caja.querySelectorAll(".answer");
+
+  botones.forEach(b=>b.disabled=true);
+
+  const feedback=
+    caja.querySelector(".feedback");
+
+
+  if(correcta){
+
+    boton.classList.add("correct");
+
+    let puntos=
+      Number(
+        document.getElementById("actividad")
+        .dataset.puntos
+      )+1;
+
+    document.getElementById("actividad")
+      .dataset.puntos=puntos;
+
+    feedback.textContent=
+      "🌟 ¡Correcto! ¡Muy bien!";
+
+    sonidoCorrecta();
+
+  }else{
+
+    boton.classList.add("wrong");
+
+    feedback.textContent=
+      "💡 No pasa nada. ¡Sigue aprendiendo!";
+
+    sonidoIncorrecta();
+
+  }
+
+
+  const puntos=
+    Number(
+      document.getElementById("actividad")
+      .dataset.puntos
+    );
+
+  document.getElementById("puntuacion")
+    .textContent=
+    "Puntuación: "+
+    puntos+
+    " / "+
+    total;
+
+
+  const respondidas=
+    document.querySelectorAll(
+      ".question[data-respondida='si']"
+    ).length;
+
+
+  if(respondidas===total){
+
+    setTimeout(()=>{
+
+      sonidoFinal();
+
+      feedback.textContent +=
+        " 🎉 ¡Actividad terminada!";
+
+    },300);
+
+  }
+
+}
+
+
+/* =========================
+   LECTURA
+========================= */
+
+function abrirLectura(){
+
+  document.getElementById("titulo").textContent=
+    "📖 MUNDO 2 · LECTURA";
+
+  document.getElementById("puntuacion").textContent=
+    "Lee el cuento y responde";
+
+  document.getElementById("contenido").innerHTML=`
+
+    <div class="question">
+
+      <h2>🐰 El conejito Alfonso</h2>
+
+      <div class="story">
+
+        Alfonso era un conejito muy curioso
+        y alegre. Era hermano de Brithany.
+
+        Una mañana encontró una zanahoria
+        enorme y decidió guardarla para la cena.
+
+        Mientras jugaba, dejó la zanahoria
+        junto a un árbol.
+
+        Cuando regresó, ya no estaba.
+
+        Alfonso siguió unas pequeñas huellas
+        y encontró su zanahoria junto a una
+        ardilla.
+
+        La ardilla la había movido para que
+        no se mojara con la lluvia.
+
+        Alfonso se puso muy contento y
+        compartió la zanahoria con ella.
+
+      </div>
+
+      <button
+        class="btn yellow"
+        onclick="leerCuento()">
+
+        🔊 ESCUCHAR CUENTO
+
+      </button>
+
+      <p>
+        ¿Cómo se llamaba el conejito?
+      </p>
+
+      <button
+        class="answer"
+        onclick="responderLectura(this,true)">
+
+        Alfonso
+
+      </button>
+
+      <button
+        class="answer"
+        onclick="responderLectura(this,false)">
+
+        Tomás
+
+      </button>
+
+      <button
+        class="answer"
+        onclick="responderLectura(this,false)">
+
+        Pedro
+
+      </button>
+
+      <div class="feedback"></div>
+
+    </div>
+
+  `;
+
+  mostrar("actividad");
+
+}
+
+
+/* =========================
+   SONIDO DE LECTURA
+========================= */
+
+function leerCuento(){
+
+  sonidoClick();
+
+  if(!("speechSynthesis" in window)){
+    return;
+  }
+
+  speechSynthesis.cancel();
+
+  const texto=
+  "Alfonso era un conejito muy curioso y alegre. "+
+  "Era hermano de Brithany. "+
+  "Una mañana encontró una zanahoria enorme "+
+  "y decidió guardarla para la cena. "+
+  "Mientras jugaba dejó la zanahoria junto a un árbol. "+
+  "Cuando regresó ya no estaba. "+
+  "Alfonso siguió unas pequeñas huellas "+
+  "y encontró su zanahoria junto a una ardilla. "+
+  "La ardilla la había movido para que no se mojara "+
+  "con la lluvia. "+
+  "Alfonso se puso muy contento y compartió "+
+  "la zanahoria con ella.";
+
+  const voz=
+    new SpeechSynthesisUtterance(texto);
+
+  voz.lang="es-ES";
+  voz.rate=.9;
+
+  speechSynthesis.speak(voz);
+
+}
+
+
+/* =========================
+   RESPUESTA LECTURA
+========================= */
+
+function responderLectura(boton,correcta){
+
+  const caja=boton.parentElement;
+
+  if(caja.dataset.respondida==="si"){
+    return;
+  }
+
+  caja.dataset.respondida="si";
+
+  caja.querySelectorAll(".answer")
+    .forEach(b=>b.disabled=true);
+
+  const feedback=
+    caja.querySelector(".feedback");
+
+  if(correcta){
+
+    boton.classList.add("correct");
+
+    feedback.textContent=
+      "🌟 ¡Correcto! Alfonso es el hermano de Brithany.";
+
+    sonidoCorrecta();
+
+  }else{
+
+    boton.classList.add("wrong");
+
+    feedback.textContent=
+      "💡 Inténtalo otra vez en la próxima actividad.";
+
+    sonidoIncorrecta();
+
+  }
+
+}
+
 </script>
+
 </body>
 </html>
